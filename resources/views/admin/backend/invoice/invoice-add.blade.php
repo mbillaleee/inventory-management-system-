@@ -104,6 +104,17 @@
                                     <textarea name="description" id="description" class="form-control" placeholder="Write Description here"></textarea>
                                 </div>
                             </div><br>
+                            <div class="form-row">
+                                <div class="from-group col-md-3">
+                                    <select class="form-select" name="paid_status" id="paid_status">
+                                        <option value="">Select Status</option>
+                                        <option value="full_paid">Full Paid</option>
+                                        <option value="full_due">Full Due</option>
+                                        <option value="partial_paid">Partial Paid</option>
+                                    </select>
+                                    <input type="text" name="paid_amount" class="form-control paid_amount" placeholder="Enter Paid Amount" style="display:none;">
+                                </div>
+                            </div><br>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-info" id="storeButton">Invoice Store</button>
                             </div>
@@ -244,5 +255,15 @@
     });
 </script>
 
+<script>
+    $(document).on('change', '#paid_status', function(){
+        var paid_status = $(this).val();
+        if(paid_status == 'partial_paid'){
+            $('.paid_amount').show();
+        }else{
+            $('.paid_amount').hide();
+        }
+    })
+</script>
  
 @endsection 
