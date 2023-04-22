@@ -104,8 +104,9 @@
                                     <textarea name="description" id="description" class="form-control" placeholder="Write Description here"></textarea>
                                 </div>
                             </div><br>
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="from-group col-md-3">
+                                <label for="">Paid Status</label>
                                     <select class="form-select" name="paid_status" id="paid_status">
                                         <option value="">Select Status</option>
                                         <option value="full_paid">Full Paid</option>
@@ -114,7 +115,30 @@
                                     </select>
                                     <input type="text" name="paid_amount" class="form-control paid_amount" placeholder="Enter Paid Amount" style="display:none;">
                                 </div>
+                                <div class="from-group col-md-9">
+                                    <label for="">Customer Name</label>
+                                    <select class="form-select" name="customer_id" id="customer_id">
+                                        <option value="">Select Customer</option>
+                                        @foreach($customers as $cust)
+                                        <option value="{{ $cust->id }}">{{ $cust->name }}:-{{ $cust->mobile_no }}</option>
+                                        @endforeach
+                                        <option value="0">New Customer</option>
+                                    </select>
+                                </div>
                             </div><br>
+                            <!-- start hide add customer form  -->
+                            <div class="row new_customer" style="display: none;">
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter customer name">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="mobile_no" id="mobile_no" class="form-control" placeholder="Enter customer mobile no">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter customer email">
+                                </div>
+                            </div><br>
+                            <!-- end hide add customer form  -->
                             <div class="form-group">
                                 <button type="submit" class="btn btn-info" id="storeButton">Invoice Store</button>
                             </div>
@@ -262,6 +286,16 @@
             $('.paid_amount').show();
         }else{
             $('.paid_amount').hide();
+        }
+    })
+</script>
+<script>
+    $(document).on('change', '#customer_id', function(){
+        var customer_id = $(this).val();
+        if(customer_id == '0'){
+            $('.new_customer').show();
+        }else{
+            $('.new_customer').hide();
         }
     })
 </script>
