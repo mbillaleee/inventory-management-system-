@@ -8,6 +8,9 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\InvoiceController;
 
 
 Route::get('/', function () {
@@ -72,7 +75,30 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/product/edit/{id}', 'ProductEdit')->name('product.edit');
     Route::post('/product/update', 'ProductUpdate')->name('product.update');
     Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
-});
+}); 
+
+
+Route::controller(PurchaseController::class)->group(function () {
+    Route::get('/purchase/all', 'PurchaseAll')->name('purchase.all');
+    Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+    Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+    Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+    Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
+    Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
+
+}); 
+Route::controller(InvoiceController::class)->group(function () {
+    Route::get('/invoice/all', 'InvoiceAll')->name('invoice.all');
+    Route::get('/invoice/add', 'InvoiceAdd')->name('invoice.add');
+
+}); 
+
+
+Route::controller(DefaultController::class)->group(function () {
+    Route::get('/get-category', 'GetCategory')->name('get-category');
+    Route::get('/get-product', 'GetProduct')->name('get-product');
+    Route::get('/check-product-stock', 'GetProductStock')->name('check-product-stock');
+}); 
 
 
  

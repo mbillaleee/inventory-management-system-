@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Add Supplier Page </h4><br><br>
+                        <h4 class="card-title">Update Supplier Page </h4><br><br>
 
 
                         <form method="post" action="{{ route('supplier.update', $supplier->id) }}" id="myForm" >
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <!-- end row -->
-                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Add Supplier">
+                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Update Supplier">
                         </form>
                     </div>
                 </div>
