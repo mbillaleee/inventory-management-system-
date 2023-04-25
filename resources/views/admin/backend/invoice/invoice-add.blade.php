@@ -70,7 +70,7 @@
                         </div>  <!--  End row -->
                      </div> <!-- end card body -->
                      <div class="card-body">
-                        <form method="post" action="{{ route('purchase.store') }}">
+                        <form method="post" action="{{ route('invoice.store') }}">
                             @csrf
                             <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
                                 <thead>
