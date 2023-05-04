@@ -28,8 +28,13 @@ class InvoiceController extends Controller
      */
     public function InvoiceAll()
     {
-        $allData =Invoice::orderBy('date', 'desc')->orderBy('id', 'desc')->get();
+        $allData =Invoice::orderBy('date', 'desc')->orderBy('id', 'desc')->where('status', '1')->get();
         return view('admin.backend.invoice.invoice-all', compact('allData'));
+    }
+    public function InvoicePendingList()
+    {
+        $allData =Invoice::orderBy('date', 'desc')->orderBy('id', 'desc')->where('status','0')->get();
+        return view('admin.backend.invoice.invoice-pending-list', compact('allData'));
     }
 
     /**
@@ -147,7 +152,7 @@ class InvoiceController extends Controller
             'message' => 'Invoice data insert successfully', 
             'alert-type' => 'success'
         );
-        return redirect()->route('invoice.all')->with($notification);
+        return redirect()->route('invoice.pending.list')->with($notification);
     }
 
     /**
@@ -190,8 +195,38 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function InvoiceDelete($id)
     {
-        //
+        $invoice = Invoice::findOrFail($id);
+        $invoice->delete();
+        InvoiceDetail::where('invoice_id', $invoice->id)->delete();
+        Payment::where('invoice_id', $invoice->id)->delete();
+        PaymentDetail::where('invoice_id', $invoice->id)->delete();
+
+        $notification = array(
+            'message' => 'Invoice delete successfully', 
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+
+    public function InvoiceApprove($id){
+        $invoice = Invoice::with('invoice_details')->findOrFail($id);
+        // dd($invoice);
+        return view('admin.backend.invoice.invoice-approve', compact('invoice'));
+    }
+    public function ApproveStore(Request $request, $id){
+        foreach($request->selling_qty as $key => $value){
+            $invoice_details = InvoiceDetails('id', $key)->first();
+            $product = Product::where('id', $invoice_details->product_id)->first();
+            if($product->quantity < $request->selling_qty[$key]){
+                $notification = array(
+                    'message' => 'Sorry you have to Maximum Value', 
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }
     }
 }
