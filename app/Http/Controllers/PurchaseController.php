@@ -45,32 +45,34 @@ class PurchaseController extends Controller
      */
     public function PurchaseStore(Request $request)
     {
+        // dd($request->all());
         if($request->category_id == null){
             $notification = array(
                 'message' => 'Sorry you do not select any Category', 
                 'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
-        }else{
-            $count_category = count($request->category_id);
-            for($i=0; $i<$count_category; $i++){
-                $purchase = new Purchase();
-                $purchase->date = date('Y-m-d', strtotime($request->date[$i]));
-                $purchase->purchase_no = $request->purchase_no[$i];
-                $purchase->supplier_id = $request->supplier_id[$i];
-                $purchase->category_id = $request->category_id[$i];
+        }else {
 
-                $purchase->product_id = $request->product_id[$i];
-                $purchase->buying_qty = $request->buying_qty[$i];
-                $purchase->unit_price = $request->unit_price[$i];
-                $purchase->description = $request->description[$i];
-                $purchase->buying_price = $request->buying_price[$i];
+        $count_category = count($request->category_id);
+        for ($i=0; $i < $count_category; $i++) { 
+            $purchase = new Purchase();
+            $purchase->date = date('Y-m-d', strtotime($request->date[$i]));
+            $purchase->purchase_no = $request->purchase_no[$i];
+            $purchase->supplier_id = $request->supplier_id[$i];
+            $purchase->category_id = $request->category_id[$i];
 
-                $purchase->created_by = Auth::user()->id;
-                $purchase->status = 0;
-                $purchase->save();
-            } //End foreach
-        } //end else
+            $purchase->product_id = $request->product_id[$i];
+            $purchase->buying_qty = $request->buying_qty[$i];
+            $purchase->unit_price = $request->unit_price[$i];
+            $purchase->buying_price = $request->buying_price[$i];
+            $purchase->description = $request->description[$i];
+
+            $purchase->created_by = Auth::user()->id;
+            $purchase->status = '0';
+            $purchase->save();
+        } // end foreach
+    } // end else 
         $notification = array(
             'message' => 'Data save successfully', 
             'alert-type' => 'success'
@@ -131,8 +133,9 @@ class PurchaseController extends Controller
     public function PurchaseApprove(Purchase $purchase, $id)
     {
         $purchase = Purchase::findOrFail($id);
-        $product = Product::where('id', $purchase->product_id)->first();
+        $product = Product::where('id',$purchase->product_id)->first();
         $purchase_qty = ((float)($purchase->buying_qty))+((float)($product->quantity));
+        // dd($purchase_qty);
         $product->quantity = $purchase_qty;
         if($product->save()){
             Purchase::findOrFail($id)->update([

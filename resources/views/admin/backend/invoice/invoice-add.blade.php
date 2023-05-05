@@ -154,7 +154,7 @@
     <tr class="delete_add_more_item" id="delete_add_more_item">
         <input type="hidden" name="date" value="@{{date}}">
         <input type="hidden" name="invoice_no" value="@{{invoice_no}}">
-        <input type="hidden" name="product_id[]" value="@{{product_id}}">
+        <!-- <input type="hidden" name="product_id[]" value="@{{product_id}}"> -->
         <td>
             <input type="hidden" name="category_id[]" value="@{{category_id}}">@{{category_name}}
         </td>

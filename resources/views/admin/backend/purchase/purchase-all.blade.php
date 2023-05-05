@@ -22,7 +22,7 @@
                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th>Sl</th>
+                                <!-- <th>Sl</th> -->
                                 <th>Purhase No</th>
                                 <th>Date</th>
                                 <th>Supplier</th>
@@ -37,8 +37,8 @@
                                 @php($i = 1)
                                 @foreach($allData as $key => $item)
                                 <tr>
-                                    <td> {{ $i++}} </td>
-                                    <td> {{ $item->purchase_no }} </td>                          
+                                    <!-- <td> {{ $i++}} </td> -->
+                                    <td> {{ $item->purchase_no }} </td>
                                     <td> {{ date('d-m-Y', strtotime($item->date)) }} </td>                          
                                     <td> {{ $item['supplier']['name'] }} </td>                          
                                     <td> {{ $item['category']['name'] }} </td>                          

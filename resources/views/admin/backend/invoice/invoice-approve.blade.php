@@ -41,7 +41,7 @@
                             <table bordered class="table table-dark">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Sl</th>
+                                        <!-- <th class="text-center">Sl</th> -->
                                         <th class="text-center">Category</th>
                                         <th class="text-center">Product Name</th>
                                         <th class="text-center">Current Stock</th>
@@ -54,6 +54,7 @@
                                     @php
                                     $total_sum = 0;
                                     @endphp
+
                                     @foreach($invoice['invoice_details'] as $key=> $details)
                                     <tr>
                                         <input type="hidden" name="id">
@@ -61,7 +62,7 @@
                                         <input type="hidden" name="product_id[]" value="{{ $details->product_id }}">
                                         <input type="hidden" name="selling_qty[{{ $details->id }}]" value="{{ $details->selling_qty }}">
 
-                                        <td class="text-center">{{ $key+1}}</td>
+                                        <!-- <td class="text-center">{{ $key+1}}</td> -->
                                         <td class="text-center">{{ $details['category']['name'] }}</td>
                                         <td class="text-center">{{ $details['product']['name'] }}</td>
                                         <td class="text-center" style="background-color:#8B008B">{{ $details['product']['quantity'] }}</td>
