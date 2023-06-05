@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\StockController;
 
 
 Route::get('/', function () {
@@ -102,6 +103,10 @@ Route::controller(InvoiceController::class)->group(function () {
 
 }); 
 
+//Stock All Route
+Route::controller(StockController::class)->group(function () {
+    Route::get('/stock/report', 'StockReport')->name('stock.report');
+});  
 
 Route::controller(DefaultController::class)->group(function () {
     Route::get('/get-category', 'GetCategory')->name('get-category');
