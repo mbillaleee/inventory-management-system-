@@ -80,8 +80,9 @@
                                                         </td>
                                                         <td class="text-center"><strong>Product Name</strong>
                                                         </td>
-                                                        <td class="text-center"><strong>Stock</strong>
-                                                        </td>
+                                                        <td class="text-center"><strong>In Qty</strong></td>
+                                                        <td class="text-center"><strong>Out Qty</strong></td>
+                                                        <td class="text-center"><strong>Stock</strong></td>
 
                                                     </tr>
                                                 </thead>
@@ -89,13 +90,22 @@
                                                     <!-- foreach ($order->lineItems as $line) or some such thing here -->
 
                                                     @foreach($allData as $key => $item)
+
+                                                    @php
+                                                    $buying_total = App\Models\Purchase::where('category_id', $item->category_id)->where('product_id', $item->id)->where('status', '1')->sum('buying_qty');
+
+                                                    $selling_total = App\Models\InvoiceDetail::where('category_id', $item->category_id)->where('product_id', $item->id)->where('status', '1')->sum('selling_qty');
+
+                                                    @endphp
                                                     <tr>
                                                         <td class="text-center"> {{ $key+1 }} </td>
                                                         <td class="text-center"> {{ $item['supplier']['name'] }} </td>
                                                         <td class="text-center"> {{ $item['unit']['name'] }} </td>
                                                         <td class="text-center"> {{ $item['category']['name'] }} </td>
                                                         <td class="text-center"> {{ $item->name }} </td>
-                                                        <td class="text-center"> {{ $item->quantity }} </td>
+                                                        <td class="text-center">  <span class="btn btn-success">{{ $buying_total}}</span></td>
+                                                        <td class="text-center">  <span class="btn btn-info">{{ $selling_total }}</span></td>
+                                                        <td class="text-center">  <span class="btn btn-danger">{{ $item->quantity }}</span></td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
