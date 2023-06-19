@@ -26,6 +26,7 @@
                                 <input type="radio" name="supplier_product_wise" value="product_wise" class="search_value">
                             </div>
                          </div> <!-- end row -->
+                         <!-- Supplier wise report Start-->
                          <div class="show_supplier" style="display:none">
                             <form action="{{ route('supplier.wise.pdf') }}" method="GET" id="myForm" target="_blank">
                                 <div class="row">
@@ -44,6 +45,42 @@
                                 </div>
                             </form>
                          </div>
+                         <!-- Supplier wise report end-->
+                         <!-- Product wise report -->
+                         <div class="show_product" style="display:none">
+                            <form action="{{ route('product.wise.pdf') }}" method="GET" id="myForm" target="_blank">
+                                <div class="row">
+                                <div class="col-md-4">
+                                <div class="md-3">
+                                <label for="example-text-input" class="form-label">Category Name</label>
+                                    <div class="form-group col-sm-10">
+                                    <select name="category_id" id="category_id" class="form-select select2" aria-label="Default select example">
+                                            <option selected="">Open this select menu</option>
+                                            @foreach($category as $cat)
+                                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-3">
+                                    <label for="example-text-input" class="form-label">Product Name</label>
+                                    <div class="form-group col-sm-10">
+                                        <select name="product_id" id="product_id" class="form-select select2" aria-label="Default select example">
+                                            <option selected="">Open this select menu</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                                    <div class="col-sm-4" style="padding-top:28px">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                         </div>
+                         <!-- Product wise report end-->
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
@@ -52,6 +89,25 @@
 </div>
 
 
+<script>
+    $(function(){
+        $(document).on('change', '#category_id', function(){
+            var category_id = $(this).val();
+            $.ajax({
+                url:"{{ route('get-product') }}",
+                type:"GET",
+                data:{category_id:category_id},
+                success:function(data){
+                    var html = '<option value="">Select Category </option>';
+                    $.each(data, function(key, value){
+                        html += '<option value="'+value.id+'">'+value.name+'</option>';
+                    });
+                    $('#product_id').html(html);
+                }
+            })
+        });
+    });
+</script>
 
 <script>
     $(document).on('change', '.search_value', function(){
@@ -60,6 +116,16 @@
             $('.show_supplier').show();
         }else{
             $('.show_supplier').hide();
+        }
+    })
+</script>
+<script>
+    $(document).on('change', '.search_value', function(){
+        var search_value = $(this).val();
+        if(search_value == 'product_wise'){
+            $('.show_product').show();
+        }else{
+            $('.show_product').hide();
         }
     })
 </script>
