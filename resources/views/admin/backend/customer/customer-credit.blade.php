@@ -41,7 +41,7 @@
                                     <td> {{ $item->due_amount }} </td>                            
                                     <td>
                                         <a href="{{ route('customer.edit.invoice', $item->invoice_id) }}" class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
-                                        <a href="{{ route('customer.delete', $item->id) }}" class="btn btn-danger sm" title="Customer Invoice Details">  <i class="fa fa-eye"></i> </a>
+                                        <a href="{{ route('customer.invoice.details.pdf', $item->invoice_id) }}" class="btn btn-danger sm" title="Customer Invoice Details">  <i class="fa fa-eye"></i> </a>
                                     </td>
                                 </tr>
                                 @endforeach
