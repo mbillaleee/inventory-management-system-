@@ -24,6 +24,7 @@ Route::controller(DemoController::class)->group(function () {
     Route::get('/contact', 'ContactMethod')->name('cotact.page');
 });
 
+Route::middleware('auth')->group(function(){
 
  // Admin All Route 
 Route::controller(AdminController::class)->group(function () {
@@ -86,6 +87,8 @@ Route::controller(PurchaseController::class)->group(function () {
     Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
     Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
     Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
+    Route::get('/daily-purchase/report', 'DailyPurchaseReport')->name('daily.purchase.report');
+    Route::get('/dailypurchase/pdf', 'DailyPurchasePdf')->name('daily.purchase.pdf');
 
 });  
 Route::controller(InvoiceController::class)->group(function () {
@@ -111,6 +114,10 @@ Route::controller(StockController::class)->group(function () {
     Route::get('/supplier/wise/pdf', 'SupplierWisePdf')->name('supplier.wise.pdf');
     Route::get('/product/wise/pdf', 'ProductWisePdf')->name('product.wise.pdf');
 });  
+
+
+}); //End group middleware
+
 
 Route::controller(DefaultController::class)->group(function () {
     Route::get('/get-category', 'GetCategory')->name('get-category');
