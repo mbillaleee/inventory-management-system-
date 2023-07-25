@@ -30,8 +30,7 @@
         <div class="d-flex">
             <div class="flex-grow-1">
                 <p class="text-truncate font-size-14 mb-2">Total Sales</p>
-                <h4 class="mb-2">1452</h4>
-                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from previous period</p>
+                <h4 class="mb-2">{{ $total_sales }}</h4>
             </div>
             <div class="avatar-sm">
                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -47,9 +46,8 @@
     <div class="card-body">
         <div class="d-flex">
             <div class="flex-grow-1">
-                <p class="text-truncate font-size-14 mb-2">New Orders</p>
-                <h4 class="mb-2">938</h4>
-                <p class="text-muted mb-0"><span class="text-danger fw-bold font-size-12 me-2"><i class="ri-arrow-right-down-line me-1 align-middle"></i>1.09%</span>from previous period</p>
+                <p class="text-truncate font-size-14 mb-2">Total Purchases</p>
+                <h4 class="mb-2">{{ $total_purchases }}</h4>
             </div>
             <div class="avatar-sm">
                 <span class="avatar-title bg-light text-success rounded-3">
@@ -65,9 +63,8 @@
     <div class="card-body">
         <div class="d-flex">
             <div class="flex-grow-1">
-                <p class="text-truncate font-size-14 mb-2">New Users</p>
-                <h4 class="mb-2">8246</h4>
-                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>16.2%</span>from previous period</p>
+                <p class="text-truncate font-size-14 mb-2">Total Supplier</p>
+                <h4 class="mb-2">{{ $suppliers }}</h4>
             </div>
             <div class="avatar-sm">
                 <span class="avatar-title bg-light text-primary rounded-3">
@@ -83,13 +80,12 @@
     <div class="card-body">
         <div class="d-flex">
             <div class="flex-grow-1">
-                <p class="text-truncate font-size-14 mb-2">Unique Visitors</p>
-                <h4 class="mb-2">29670</h4>
-                <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i class="ri-arrow-right-up-line me-1 align-middle"></i>11.7%</span>from previous period</p>
+                <p class="text-truncate font-size-14 mb-2">Total Customers</p>
+                <h4 class="mb-2">{{ $customers}}</h4>
             </div>
             <div class="avatar-sm">
                 <span class="avatar-title bg-light text-success rounded-3">
-                    <i class="mdi mdi-currency-btc font-size-24"></i>  
+                    <i class="ri-user-3-line font-size-24"></i>  
                 </span>
             </div>
         </div>                                              
@@ -114,7 +110,7 @@
 
         <h4 class="card-title mb-4">Latest Transactions</h4>
 
-        <div class="table-responsive">
+        {{-- <div class="table-responsive">
             <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
                 <thead class="table-light">
                     <tr>
@@ -234,7 +230,7 @@
                      <!-- end -->
                 </tbody><!-- end tbody -->
             </table> <!-- end table -->
-        </div>
+        </div> --}}
     </div><!-- end card -->
 </div><!-- end card -->
 </div>

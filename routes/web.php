@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\DefaultController;
@@ -25,6 +26,8 @@ Route::controller(DemoController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function(){
+
+Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('dashboard');
 
  // Admin All Route 
 Route::controller(AdminController::class)->group(function () {
@@ -145,9 +148,8 @@ Route::controller(DefaultController::class)->group(function () {
 
 
 
-Route::get('/dashboard', function () {
-    return view('admin.index');
-})->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
 
